@@ -1,5 +1,5 @@
 {
-  "name": "shopix-tp",
+  "name": "blog-de-roberto",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,15 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^5.5.2",
+    "@prisma/client": "^5.4.1",
     "bcrypt": "^5.1.1",
-    "jsonwebtoken": "^9.0.2",
-    "next": "14.0.2",
-    "prisma": "^5.5.2",
+    "jsonwebtoken": "8.5.1",
+    "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

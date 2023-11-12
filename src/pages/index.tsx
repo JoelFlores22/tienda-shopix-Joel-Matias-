@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 interface Producto {
@@ -39,6 +40,7 @@ function Page() {
           </li>
         ))}
       </ul>
+      <Link href="auth/registrarse">Ir a registro</Link>
     </div>
   );
 }
