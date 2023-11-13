@@ -1,48 +1,58 @@
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import { ApiResponse, Product } from "@/utils/interface";
+import Image from 'next/image';
+import Link from "next/link";
 
-interface Producto {
-  id: number;
-  title: string;
-  // Agrega otros campos según la estructura de tu API
-}
 
-async function obtenerProductos(): Promise<Producto[]> {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const datos: Producto[] = await res.json();
+export async function getProduct(): Promise<ApiResponse> {
+  const products = await fetch(
+    "https://fakestoreapi.com/products/",{
+      method: "GET",
+      headers:{
+       "Content-Type": "application/json"
+      }
+    }
+  )
+  const datos = await products.json();
 
   return datos;
 }
 
-function Page() {
-  const [productos, setProductos] = useState<Producto[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const productosData = await obtenerProductos();
-        setProductos(productosData);
-      } catch (error) {
-        console.error('Error al obtener productos:', error);
-      }
-    };
-
-    fetchData();
-  }, []); // un array de dependencias vacío significa que este efecto se ejecuta una vez al montar el componente
+//@ts-ignore
+export default function Page({ product }: { product: Product[] }) {
+  console.log(product);
 
   return (
-    <div>
-      <h1>Lista de Productos</h1>
-      <ul>
-        {productos.map((producto) => (
-          <li key={producto.id}>
-            {producto.title}
-          </li>
-        ))}
-      </ul>
-      <Link href="auth/registrarse">Ir a registro</Link>
-    </div>
+    <>
+      {product.map((p: Product) => (
+        <div key={p.id} className="py-20 w-96 flex flex-col">
+          <h1>{p.title}</h1>
+          <p>Price: ${p.price}</p>
+          <p>Description: {p.description}</p>
+          <p>Category: {p.category}</p>
+          <Link href={`/product/${p.id}`}>
+            <Image src={p.image} alt={p.title} width={300} height={200} />
+          </Link>
+          <p>Rating: {p.rating.rate} ({p.rating.count} reviews)</p>
+        </div>
+      ))}
+    </>
   );
 }
 
-export default Page;
+export async function getServerSideProps() {
+  try {
+    const product = await getProduct();
+    return {
+      props: {
+        product,
+      },
+    };
+  } catch (error) {
+    console.error('Error al obtener datos:', error);
+    return {
+      props: {
+        product: null,
+      },
+    };
+  }
+}
