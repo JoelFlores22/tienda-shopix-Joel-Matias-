@@ -1,6 +1,5 @@
 "use client"
 import { FormEvent ,useEffect,useRef } from "react";
-import { verify } from "jsonwebtoken";
 import { useContext } from "react";
 import { UserContext } from "@/context/UseContext";
 import Link from "next/link";
@@ -51,27 +50,84 @@ export default function FormularioDeRegistro(){
 
         setUser({ ...datosAEnviar, token })
 
-        // const usuarioDecodificado = verify(token, 
-        //     process.env.NEXT_PUBLIC_TOKEN_SECRET as string
-        // );
-
-        // console.log(usuarioDecodificado);
+        window.location.href = "/"
     }
 
     return(
         <main>
-            <form onSubmit={mandarDatosDeRegistro} className="flex flex-col w-80 text-black">
-                <input ref={nombreRef} type="text" placeholder="Nombre completo" />
-                <input ref={edadRef} type="number" inputMode="numeric" placeholder="Edad" />
-                <input ref={emailRef} type="email" placeholder="Email" />
-                <input ref={passwordRef} type="password" placeholder="Contraseña" />
+            <div className="mx-auto max-w-lg text-center py-20">
+                <h1 className="text-2xl font-bold sm:text-3xl">Get started today!</h1>
 
-                <input type="submit" value="Registrarse" className="text-white"/>
+                <p className="mt-4 text-gray-500">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla
+                eaque error neque ipsa culpa autem, at itaque nostrum!
+                </p>
+            </div>
+            <form onSubmit={mandarDatosDeRegistro} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+                <div>
+                    <label htmlFor="nombre" className="sr-only">Nombre</label>
+
+                    <div className="relative">
+                        <input
+                        type="text"
+                        className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                        placeholder="Nombre"
+                        ref={nombreRef}
+                        />
+                    </div>
+                    </div>
+                <div>
+                    <label htmlFor="Edad" className="sr-only">Edad</label>
+
+                    <div className="relative">
+                        <input
+                        type="number"
+                        inputMode="numeric"
+                        className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                        placeholder="Edad"
+                        ref={edadRef}
+                        />
+                    </div>
+                    </div>
+                <div>
+                    <label htmlFor="email" className="sr-only">Email</label>
+
+                    <div className="relative">
+                        <input
+                        type="email"
+                        className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                        placeholder="Enter email"
+                        ref={emailRef}
+                        />
+                    </div>
+                    </div>
+
+                    <div>
+                    <label htmlFor="password" className="sr-only">Password</label>
+
+                    <div className="relative">
+                        <input
+                        type="password"
+                        className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                        placeholder="Enter password"
+                        ref={passwordRef}
+                        />
+                    </div>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                    <button
+                        type="submit"
+                        className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+                    >
+                        Register
+                    </button>
+                </div>
+                <br />
+                <br />
+                <br />
             </form>
 
-            <button onClick={() => console.log(user)}>Click</button>
-
-            <Link href="auth/iniciar-sesion">Ir a inicio de sesion</Link>
         </main>
     )
 }
