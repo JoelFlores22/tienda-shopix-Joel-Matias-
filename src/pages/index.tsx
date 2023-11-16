@@ -2,7 +2,6 @@ import { ApiResponse, Product } from "@/utils/interface";
 import Image from 'next/image';
 import Link from "next/link";
 
-
 export async function getProduct(): Promise<ApiResponse> {
   const products = await fetch(
     "https://fakestoreapi.com/products/",{
@@ -20,13 +19,11 @@ export async function getProduct(): Promise<ApiResponse> {
 
 
 export default function Page({ product }: { product: Product[] }) {
-  console.log(product);
-
   return (
     <section className="flex flex-row flex-wrap justify-center items-center">
       {product.map((p: Product) => (
         <div key={p.id} className="my-10 mx-5 w-96">
-                    <Link href={`/product/${p.id}`} className="group relative block overflow-hidden">
+          <Link href={`/product/${p.id}`} className="group relative block overflow-hidden">
             <button
               className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
             >
@@ -67,16 +64,8 @@ export default function Page({ product }: { product: Product[] }) {
 
               <p className="mt-1.5 text-sm text-gray-700">${p.price}</p>
 
-              <form className="mt-4">
-                <button
-                  className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
-                >
-                  Add to Cart
-                </button>
-              </form>
             </div>
           </Link>
-          
         </div>
       ))}
     </section>

@@ -13,10 +13,12 @@ export default function FormularioDeRegistro(){
     const passwordRef = useRef(null);
     const { user, setUser } = useContext(UserContext);
     
-    useEffect(() => {
-        // Esta lógica se ejecutará cada vez que user se actualice
-        console.log("Usuario actualizado:", user);
-      }, [user]);
+    
+    // useEffect(() => {
+    //     // Esta lógica se ejecutará cada vez que user se actualice
+    //     console.log("Usuario actualizado:", user);
+    //     localStorage.setItem("datosUsuario", JSON.stringify(user));
+    //   }, [user]);
 
     async function mandarDatosDeRegistro(evento: FormEvent){
         evento.preventDefault()
@@ -50,7 +52,7 @@ export default function FormularioDeRegistro(){
 
         setUser({ ...datosAEnviar, token })
 
-        window.location.href = "/"
+        console.log(user)
     }
 
     return(
@@ -127,6 +129,8 @@ export default function FormularioDeRegistro(){
                 <br />
                 <br />
             </form>
+
+            <button onClick={() =>  console.log(user)}>Verificar use</button>
 
         </main>
     )

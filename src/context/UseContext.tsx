@@ -1,15 +1,10 @@
 "use client"
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, useState } from 'react';
 
-interface UserContextProps {
-  user: any; // Ajusta el tipo según tus necesidades
-  setUser: React.Dispatch<React.SetStateAction<any>>;
-}
+export const UserContext = createContext({} as any);
 
-export const UserContext = createContext({} as UserContextProps);
-
-export function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<any>(null);
+export function UserProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState();
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

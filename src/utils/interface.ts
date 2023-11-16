@@ -11,6 +11,13 @@ export interface Product {
   };
 }
 
+export interface UserData {
+  nombre: string;
+  email: string;
+  edad: number;
+  password: string;
+}
+
 export interface ApiResponse {
   products: Product[];
 }
